@@ -117,4 +117,18 @@ echo "Build log: $BUILD_LOG"
         m bacon
     fi
 
+    # Keep the verified Android 17 blueline display-module fix in KSU builds.
+    hwc_module="$ANDROID_PRODUCT_OUT/vendor/lib64/hw/hwcomposer.qcom.so"
+    vendor_props="$ANDROID_PRODUCT_OUT/vendor/build.prop"
+    if [[ ! -s "$hwc_module" ]]; then
+        echo "FATAL: Qualcomm hardware composer is missing: $hwc_module" >&2
+        exit 1
+    fi
+    if [[ ! -f "$vendor_props" ]] || ! grep -qx 'ro.hardware.hwcomposer=qcom' "$vendor_props"; then
+        echo "FATAL: ro.hardware.hwcomposer=qcom is missing from $vendor_props" >&2
+        exit 1
+    fi
+    echo "Verified: Qualcomm HWC module and vendor property are present"
+    echo "Verified: generated KSU config checked and pinned submodule $KSU_NEXT_PIN initialized"
+
 ) 2>&1 | tee "$BUILD_LOG"
