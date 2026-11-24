@@ -16,7 +16,7 @@ It ports the **same non-GKI manual hooks** used by Infinity-X blueline:
 - Kconfig/Makefile integration under `drivers/kernelsu`.
 - Manual syscall, reboot, file, stat, read, UID and input hooks.
 - A real Git submodule at `KernelSU`, pinned to commit
-  `54100bd88fcbb3f2cc420a60c2f7a402b522e806` from
+  `d53ccccca7472d793515840f2dc96a184128fc09` from
   `its-hecker/KernelSU-Next` (`legacy_blueline_4.9`).
 - **No SUSFS.** SELinux and the existing Android 17 legacy compatibility pins
   are preserved.
@@ -138,7 +138,7 @@ git -C kernel/google/msm-4.9/KernelSU rev-parse HEAD
 grep '^CONFIG_KSU' out/target/product/blueline/obj/KERNEL_OBJ/.config
 ```
 
-The SHA must be `54100bd88fcbb3f2cc420a60c2f7a402b522e806`; the generated
+The SHA must be `d53ccccca7472d793515840f2dc96a184128fc09`; the generated
 config must show both `CONFIG_KSU=y` and `CONFIG_KSU_MANUAL_HOOK=y`.
 
 Then verify these ROM packages:
